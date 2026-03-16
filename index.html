@@ -13,9 +13,9 @@
             extend: {
                 colors: {
                     brand: {
-                        50: '#F0F9FF',  // Very light blue tint matching the logo for the highlight column
+                        50: '#F0F9FF',
                         100: '#E0F2FE',
-                        500: '#0092D6', // Matches your exact logo blue
+                        500: '#0092D6',
                         900: '#082F49',
                     }
                 }
@@ -37,14 +37,13 @@
       --text-muted: #666666;
       --bg-warm: #FDFBF7;
       --bg-white: #FFFFFF;
-      --accent: #0092D6; /* Updated to your logo's tech blue */
+      --accent: #0092D6;
       --nav-height: 80px;
     }
     
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     
-    /* Anchor offset fix */
     [id] { scroll-margin-top: 100px; }
     
     body {
@@ -93,7 +92,7 @@
       border-radius: 12px;
       transition: all 0.2s ease;
       cursor: pointer; border: none;
-      text-decoration: none; /* added for anchor tag styling */
+      text-decoration: none;
     }
     .btn:hover { background: #000; transform: translateY(-2px); color: var(--bg-white); }
 
@@ -129,9 +128,60 @@
 
     .metric-value { font-family: 'Playfair Display', serif; font-size: 4.5rem; color: var(--text-main); }
     
-    /* Comparison Table Scrollbar Hide */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .hotspot-tooltip {
+      position: absolute;
+      bottom: calc(100% + 14px);
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      border-radius: 9999px;
+      background: #FFFFFF !important;
+      padding: 0.75rem 1.25rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.05);
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      transform: translateY(10px) scale(0.95);
+    }
+
+    .hotspot-tooltip.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .hotspot-tooltip::after {
+      left: 50%;
+      transform: translateX(-50%);
+      content: '';
+      position: absolute;
+      top: 100%;
+      border-width: 6px;
+      border-style: solid;
+      border-color: #FFFFFF transparent transparent transparent;
+    }
+
+    .tooltip-accent {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hotspot-tooltip h4 {
+      color: #000000 !important;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 <body>
@@ -144,7 +194,7 @@
       Early bird price available — <a href="#waitlist" class="underline">Join the wait list now</a>
     </div>
     <div class="flex items-center gap-4 text-gray-700">
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.instagram.com/realignpillows?igsh=MWJ4bG5lMGNjczIwZw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       </div>
   </nav>
 
@@ -235,13 +285,15 @@
           <div class="relative w-full max-w-4xl mx-auto px-8 md:px-16 pb-12 pt-8">
               <img src="images/SideView.png" alt="Elevated Side Shelves" class="w-full h-auto object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.02]" />
               
-              <div class="absolute top-[48%] left-[26%] flex flex-col items-center z-20 pointer-events-none">
+              <div class="absolute top-[48%] left-[26%] flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
+                   data-title="Stable Upper-Body Posture">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
               </div>
 
-              <div class="absolute top-[34%] right-[20%] flex flex-col items-center z-20 pointer-events-none">
+              <div class="absolute top-[34%] right-[20%] flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
+                   data-title="Stable Upper-Body Posture">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
@@ -257,7 +309,8 @@
           <div class="relative w-full max-w-4xl mx-auto px-8 md:px-16 pb-12 pt-8">
               <img src="images/SideUpperview.png" alt="Headrest Zone" class="w-full h-auto object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.02]" />
               
-              <div class="absolute top-[43%] left-[51%] -translate-x-1/2 flex flex-col items-center z-20 pointer-events-none">
+              <div class="absolute top-[43%] left-[51%] -translate-x-1/2 flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
+                   data-title="Spinal Alignment Guard">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
@@ -271,10 +324,22 @@
           </div>
           <div class="relative w-full max-w-4xl mx-auto px-8 md:px-16 pb-12 pt-4">
               <img src="images/FrontView.png" alt="Optimized Viewing Distance" class="w-full h-auto object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.02]" />
+              
+              <div class="absolute top-[40%] left-[50%] -translate-x-1/2 flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
+                   data-title="Vision & Flexion Protection">
+                  <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
+                      <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
+                  </div>
+              </div>
           </div>
       </div>
 
     </section>
+
+    <div id="tooltip" class="hotspot-tooltip">
+      <div class="tooltip-accent"></div>
+      <h4 id="tooltip-title"></h4>
+    </div>
 
     <section class="py-20 text-center border-t border-gray-200 relative">
         <div class="text-center mb-8 md:mb-12 px-6">
@@ -467,7 +532,6 @@
   </section>
 
   <script>
-    // Initialize Lucide icons for the comparison table
     lucide.createIcons();
 
     (function () {
@@ -506,7 +570,7 @@
             const data = await res.json();
             if (data.status === "success") {
               feedback.textContent = 'Success! You are on the waitlist.';
-              feedback.style.color = '#0092D6'; // Using your brand blue here
+              feedback.style.color = '#0092D6'; 
               form.reset();
               fetchCount();
             }
@@ -524,7 +588,6 @@
           const currentIcon = this.querySelector('i');
           const isCurrentlyActive = currentPanel.classList.contains('active');
           
-          // Step 1: 先关闭所有已经打开的 FAQ 面板
           faqBtns.forEach(otherBtn => {
             const otherPanel = otherBtn.nextElementSibling;
             const otherIcon = otherBtn.querySelector('i');
@@ -534,7 +597,6 @@
             otherIcon.classList.add('fa-plus');
           });
 
-          // Step 2: 如果当前点击的面板之前不是打开状态，则展开它
           if (!isCurrentlyActive) {
             currentPanel.classList.add('active');
             currentIcon.classList.remove('fa-plus');
@@ -542,6 +604,34 @@
             currentPanel.style.maxHeight = currentPanel.scrollHeight + "px";
           }
         });
+      });
+
+      const triggers = document.querySelectorAll('.hotspot-trigger');
+      const tooltip = document.getElementById('tooltip');
+      const tooltipTitle = document.getElementById('tooltip-title');
+
+      triggers.forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const rect = this.getBoundingClientRect();
+          const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+          tooltipTitle.textContent = this.getAttribute('data-title');
+          
+          const triggerCenterX = rect.left + scrollLeft + rect.width / 2;
+          
+          tooltip.style.left = triggerCenterX + 'px';
+          const tooltipWidth = tooltip.offsetWidth;
+          tooltip.style.left = (triggerCenterX - tooltipWidth / 2) + 'px';
+          
+          tooltip.style.top = (rect.top + scrollTop) + 'px';
+          tooltip.classList.add('active');
+        });
+      });
+
+      document.addEventListener('click', () => {
+        tooltip.classList.remove('active');
       });
     })();
   </script>
