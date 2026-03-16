@@ -131,40 +131,41 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+    /* --- ENHANCED IOS-STYLE TOOLTIP --- */
     .hotspot-tooltip {
       position: absolute;
-      bottom: calc(100% + 14px);
-      z-index: 999;
-      visibility: hidden;
-      opacity: 0;
-      border-radius: 9999px;
-      background: #FFFFFF !important;
-      padding: 0.75rem 1.25rem;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.05);
-      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(10px);
+      padding: 0.6rem 1rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.04);
       pointer-events: none;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      white-space: nowrap;
-      transform: translateY(10px) scale(0.95);
+      opacity: 0;
+      /* Core positioning: Centers on X axis, shifts up on Y axis */
+      transform-origin: bottom center;
+      transform: translate(-50%, calc(-100% - 4px)) scale(0.9);
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .hotspot-tooltip.active {
       opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
+      /* Precisely lifts the tooltip so the arrow hits the dot perfectly */
+      transform: translate(-50%, calc(-100% - 12px)) scale(1);
     }
 
     .hotspot-tooltip::after {
-      left: 50%;
-      transform: translateX(-50%);
       content: '';
       position: absolute;
       top: 100%;
-      border-width: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px 6px 0 6px;
       border-style: solid;
-      border-color: #FFFFFF transparent transparent transparent;
+      border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
     }
 
     .tooltip-accent {
@@ -172,15 +173,17 @@
       height: 6px;
       background: var(--accent);
       border-radius: 50%;
+      flex-shrink: 0;
     }
 
     .hotspot-tooltip h4 {
       color: #000000 !important;
-      font-size: 0.95rem;
-      font-weight: 700;
+      font-size: 0.9rem;
+      font-weight: 600;
       margin: 0;
       font-family: 'Inter', sans-serif;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
     }
   </style>
 </head>
@@ -232,7 +235,6 @@
     </section>
 
     <section class="py-24 border-t border-gray-200">
-      
       <div class="text-center mb-20 max-w-5xl mx-auto">
           <h2 class="font-serif text-4xl md:text-5xl mb-12 text-slate-900">The Problem</h2>
           <div class="w-full overflow-hidden rounded-[2.5rem] border border-gray-100 shadow-sm bg-white">
@@ -243,27 +245,19 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 max-w-5xl mx-auto">
         <div>
           <div class="metric-value">95%</div>
-          <p class="text-lg text-gray-600">
-            Of Americans Gen Z are using their phone in bed before falling asleep. This bedtime routine is a global habit that traditional pillows failed to address.
-          </p>
+          <p class="text-lg text-gray-600">Of Americans Gen Z are using their phone in bed before falling asleep. This bedtime routine is a global habit that traditional pillows failed to address.</p>
         </div>
         <div>
           <div class="metric-value">38m</div>
-          <p class="text-lg text-gray-600">
-            Spend on phone before sleeping, on average. Every night, these 38 minutes represent a significant cumulative strain on your cervical spine.
-          </p>
+          <p class="text-lg text-gray-600">Spend on phone before sleeping, on average. Every night, these 38 minutes represent a significant cumulative strain on your cervical spine.</p>
         </div>
         <div>
           <div class="metric-value">≥50%</div>
-          <p class="text-lg text-gray-600">
-            Of regular lying-down phone users suffer from chronic neck and back pain. The posture people collapse into every night is the silent impact on health.
-          </p>
+          <p class="text-lg text-gray-600">Of regular lying-down phone users suffer from chronic neck and back pain. The posture people collapse into every night is the silent impact on health.</p>
         </div>
         <div>
           <div class="metric-value">16.4<span class="text-4xl">cm</span></div>
-          <p class="text-lg text-gray-600">
-            Average phone viewing distance lying down. This is roughly the length of an iPhone 17 Pro Max, causing extreme eye strain and forced neck flexion.
-          </p>
+          <p class="text-lg text-gray-600">Average phone viewing distance lying down. This is roughly the length of an iPhone 17 Pro Max, causing extreme eye strain and forced neck flexion.</p>
         </div>
       </div>
     </section>
@@ -343,12 +337,8 @@
 
     <section class="py-20 text-center border-t border-gray-200 relative">
         <div class="text-center mb-8 md:mb-12 px-6">
-            <h2 class="font-serif text-4xl md:text-5xl mb-4 text-slate-900">
-                Why Realign is the Ultimate Choice
-            </h2>
-            <p class="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
-                The only pillow engineered for perfect posture—whether you're scrolling in bed or sleeping through the night.
-            </p>
+            <h2 class="font-serif text-4xl md:text-5xl mb-4 text-slate-900">Why Realign is the Ultimate Choice</h2>
+            <p class="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">The only pillow engineered for perfect posture—whether you're scrolling in bed or sleeping through the night.</p>
         </div>
 
         <div class="md:hidden flex items-center justify-center gap-2 text-brand-500 text-sm font-semibold mb-6 animate-pulse">
@@ -361,32 +351,26 @@
                 <thead>
                     <tr>
                         <th class="w-1/4 md:w-1/5 p-3 md:p-6 bg-[#FDFBF7] md:bg-transparent sticky left-0 z-20"></th>
-                        
                         <th class="w-[18%] md:w-1/5 p-3 md:p-6 text-center align-bottom bg-transparent">
                             <div class="flex flex-col items-center gap-2 md:gap-4">
                                 <img src="images/traditionalpillow.png" alt="Traditional Pillow" class="h-16 md:h-24 w-auto object-contain opacity-80 mix-blend-multiply rounded-xl">
                                 <span class="text-[10px] md:text-sm font-semibold text-slate-500 uppercase tracking-wider leading-tight">Traditional<br>Pillow</span>
                             </div>
                         </th>
-                        
                         <th class="w-[18%] md:w-1/5 p-3 md:p-6 text-center align-bottom bg-transparent">
                             <div class="flex flex-col items-center gap-2 md:gap-4">
                                 <img src="images/ergonomicpillow.png" alt="Ergonomic Pillow" class="h-16 md:h-24 w-auto object-contain opacity-80 mix-blend-multiply rounded-xl">
                                 <span class="text-[10px] md:text-sm font-semibold text-slate-500 uppercase tracking-wider leading-tight">Ergonomic<br>Pillow</span>
                             </div>
                         </th>
-                        
                         <th class="w-[18%] md:w-1/5 p-3 md:p-6 text-center align-bottom bg-transparent">
                             <div class="flex flex-col items-center gap-2 md:gap-4">
                                 <img src="images/phonepillow.png" alt="Phone Pillow" class="h-16 md:h-24 w-auto object-contain opacity-80 mix-blend-multiply rounded-xl">
                                 <span class="text-[10px] md:text-sm font-semibold text-slate-500 uppercase tracking-wider leading-tight">Phone<br>Pillow</span>
                             </div>
                         </th>
-                        
                         <th class="w-[21%] md:w-1/5 p-3 md:p-6 text-center align-bottom bg-brand-50 rounded-t-2xl relative border-t-4 border-brand-500 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
-                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-brand-500 text-white text-[9px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full tracking-wide shadow-sm whitespace-nowrap">
-                                OUR SOLUTION
-                            </div>
+                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-brand-500 text-white text-[9px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full tracking-wide shadow-sm whitespace-nowrap">OUR SOLUTION</div>
                             <div class="flex flex-col items-center gap-2 md:gap-4 mt-2">
                                 <img src="images/realignpillow.png" alt="Realign Pillow" class="h-20 md:h-28 w-auto object-contain drop-shadow-md mix-blend-multiply rounded-xl">
                                 <span class="text-xs md:text-base font-bold text-slate-900 uppercase tracking-wider leading-tight">Realign<br>Pillow</span>
@@ -395,119 +379,60 @@
                     </tr>
                 </thead>
                 <tbody class="text-center text-xs sm:text-sm md:text-base bg-white rounded-3xl shadow-sm border border-gray-100">
-                    
                     <tr class="group">
                         <td class="p-4 md:p-6 font-medium text-slate-700 text-left border-b border-slate-100 bg-white md:group-hover:bg-slate-50/50 transition-colors rounded-tl-3xl sticky left-0 z-10 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.05)] md:shadow-none">All-Night Sleep Comfort</td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 bg-brand-50">
-                            <i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i>
-                        </td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 bg-brand-50"><i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i></td>
                     </tr>
-
                     <tr class="group">
                         <td class="p-4 md:p-6 font-medium text-slate-700 text-left border-b border-slate-100 bg-white md:group-hover:bg-slate-50/50 transition-colors sticky left-0 z-10 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.05)] md:shadow-none">Device-Friendly Ergonomics</td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 bg-brand-50">
-                            <i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i>
-                        </td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 bg-brand-50"><i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i></td>
                     </tr>
-
                     <tr class="group">
                         <td class="p-4 md:p-6 font-medium text-slate-700 text-left border-b border-slate-100 bg-white md:group-hover:bg-slate-50/50 transition-colors sticky left-0 z-10 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.05)] md:shadow-none">Optimal Screen Viewing Distance</td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 border-b border-slate-100 bg-brand-50">
-                            <i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i>
-                        </td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 border-b border-slate-100 bg-brand-50"><i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i></td>
                     </tr>
-
                     <tr class="group">
                         <td class="p-4 md:p-6 font-medium text-slate-700 text-left bg-white md:group-hover:bg-slate-50/50 transition-colors rounded-bl-3xl sticky left-0 z-10 shadow-[4px_0_10px_-4px_rgba(0,0,0,0.05)] md:shadow-none">Premium Head & Neck Support</td>
-                        <td class="p-4 md:p-6 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 group-hover:bg-slate-50/50 transition-colors">
-                            <i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i>
-                        </td>
-                        <td class="p-4 md:p-6 bg-brand-50 rounded-br-3xl shadow-[0_10px_20px_rgba(0,0,0,0.02)]">
-                            <i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i>
-                        </td>
+                        <td class="p-4 md:p-6 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="check" class="text-slate-400 w-5 h-5 md:w-6 md:h-6 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 group-hover:bg-slate-50/50 transition-colors"><i data-lucide="minus" class="text-slate-200 w-4 h-4 md:w-5 md:h-5 mx-auto"></i></td>
+                        <td class="p-4 md:p-6 bg-brand-50 rounded-br-3xl shadow-[0_10px_20px_rgba(0,0,0,0.02)]"><i data-lucide="check-circle-2" class="text-brand-500 w-6 h-6 md:w-7 md:h-7 mx-auto drop-shadow-sm"></i></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         
         <div class="mt-8 text-center">
-            <a href="#waitlist" class="btn bg-brand-500 hover:bg-brand-900 text-white font-semibold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 inline-block">
-                Join the Waitlist
-            </a>
+            <a href="#waitlist" class="btn bg-brand-500 hover:bg-brand-900 text-white font-semibold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 inline-block">Join the Waitlist</a>
         </div>
     </section>
 
     <section class="py-20 border-t border-gray-200">
       <h2 class="font-serif text-4xl mb-12 text-center">Beta Testing</h2>
       <div class="grid md:grid-cols-3 gap-12">
-        <div class="flex flex-col italic text-lg text-gray-800">
-          "Ngl, I didn’t realize how messed up my bed posture was when I doomscroll until I started using this. Realign basically forced me to scroll less because of how it keeps my neck in place. It’s lowkey forcing me to touch grass lol"
-          <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester A, Student</span>
-        </div>
-        <div class="flex flex-col italic text-lg text-gray-800">
-          "It looks very cool on my bed and it literally forces me into the right position."
-          <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester B, Student</span>
-        </div>
-        <div class="flex flex-col italic text-lg text-gray-800">
-          "It feels like a pillow that actually understands what people do before sleeping."
-          <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester C, Teacher</span>
-        </div>
+        <div class="flex flex-col italic text-lg text-gray-800">"Ngl, I didn’t realize how messed up my bed posture was when I doomscroll..." <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester A, Student</span></div>
+        <div class="flex flex-col italic text-lg text-gray-800">"It looks very cool on my bed and it literally forces me into the right position." <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester B, Student</span></div>
+        <div class="flex flex-col italic text-lg text-gray-800">"It feels like a pillow that actually understands what people do before sleeping." <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester C, Teacher</span></div>
       </div>
     </section>
 
     <section class="py-20 max-w-3xl mx-auto" id="faq">
       <h2 class="font-serif text-4xl md:text-5xl mb-12 text-center">Frequently Asked Questions</h2>
-      <button class="faq-btn" data-faq>
-        <span>Will it fit a traditional pillowcase?</span> <i class="fas fa-plus text-xs"></i>
-      </button>
-      <div class="faq-panel">
-        Realign Pillow's unique ergonomic design won't fit into a standard pillowcase. But don't worry! We have designed a custom-fit cover that will be included in the box.
-      </div>
-      <button class="faq-btn" data-faq>
-        <span>Who is the team behind Realign Pillow?</span> <i class="fas fa-plus text-xs"></i>
-      </button>
-      <div class="faq-panel">
-        We are a team of students in Singapore! As individuals who have personally struggled with poor posture, we came together to solve this common issue faced by millions of device users.
-      </div>
-      <button class="faq-btn" data-faq>
-        <span>When will my order ship?</span> <i class="fas fa-plus text-xs"></i>
-      </button>
-      <div class="faq-panel">
-        As this is a Kickstarter project, production begins once we reach our funding goal. After the campaign ends successfully, we will move straight into manufacturing. We will provide all our backers with regular updates and a clear shipping timeline from factory to doorstep.
-      </div>
+      <button class="faq-btn" data-faq><span>Will it fit a traditional pillowcase?</span> <i class="fas fa-plus text-xs"></i></button>
+      <div class="faq-panel">Realign Pillow's unique ergonomic design won't fit into a standard pillowcase. But don't worry! We have designed a custom-fit cover that will be included in the box.</div>
+      <button class="faq-btn" data-faq><span>Who is the team behind Realign Pillow?</span> <i class="fas fa-plus text-xs"></i></button>
+      <div class="faq-panel">We are a team of students in Singapore! As individuals who have personally struggled with poor posture, we came together to solve this common issue.</div>
+      <button class="faq-btn" data-faq><span>When will my order ship?</span> <i class="fas fa-plus text-xs"></i></button>
+      <div class="faq-panel">As this is a Kickstarter project, production begins once we reach our funding goal. We will provide regular updates and a clear shipping timeline.</div>
     </section>
 
   </main>
@@ -515,13 +440,10 @@
   <section class="w-full bg-[#EFECE6] border-t border-gray-100 py-24 mt-20 flex flex-col items-center text-center px-6">
     <h2 class="font-serif text-5xl mb-10">Secure your early bird pricing</h2>
     
-<div class="w-full max-w-xl bg-white p-3 rounded-2xl shadow-sm border border-gray-200">
+    <div class="w-full max-w-xl bg-white p-3 rounded-2xl shadow-sm border border-gray-200">
       <form id="waitlistFormBottom" action="#" method="POST" class="flex flex-col md:flex-row gap-3 w-full">
-        <input type="email" name="email" required placeholder="Join the waitlist now"
-               class="flex-1 px-6 py-4 rounded-xl text-gray-900 border-none outline-none text-base" />
-        <button type="submit" class="btn bg-[#1A1A1A] text-white hover:bg-black py-4 px-10 rounded-xl">
-          Join the Waitlist
-        </button>
+        <input type="email" name="email" required placeholder="Join the waitlist now" class="flex-1 px-6 py-4 rounded-xl text-gray-900 border-none outline-none text-base" />
+        <button type="submit" class="btn bg-[#1A1A1A] text-white hover:bg-black py-4 px-10 rounded-xl">Join the Waitlist</button>
       </form>
       <p id="waitlistFeedbackBottom" class="text-sm font-medium hidden mt-4 text-center"></p>
     </div>
@@ -606,6 +528,7 @@
         });
       });
 
+      // --- PERFECTED TOOLTIP POSITIONING LOGIC ---
       const triggers = document.querySelectorAll('.hotspot-trigger');
       const tooltip = document.getElementById('tooltip');
       const tooltipTitle = document.getElementById('tooltip-title');
@@ -613,19 +536,24 @@
       triggers.forEach(trigger => {
         trigger.addEventListener('click', function(e) {
           e.stopPropagation();
+          
+          // 1. Set text first so tooltip dimensions are accurate
+          tooltipTitle.textContent = this.getAttribute('data-title');
+          
+          // 2. Get exact screen coordinates of the clicked dot
           const rect = this.getBoundingClientRect();
           const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-          tooltipTitle.textContent = this.getAttribute('data-title');
+          // 3. Calculate the ABSOLUTE mathematical center of the dot
+          const dotCenterX = rect.left + scrollLeft + (rect.width / 2);
+          const dotCenterY = rect.top + scrollTop + (rect.height / 2);
           
-          const triggerCenterX = rect.left + scrollLeft + rect.width / 2;
+          // 4. Anchor the tooltip's absolute position exactly to the dot's center
+          // (The CSS transform: translate(-50%, calc(-100% - 12px)) will then lift it perfectly)
+          tooltip.style.left = dotCenterX + 'px';
+          tooltip.style.top = dotCenterY + 'px';
           
-          tooltip.style.left = triggerCenterX + 'px';
-          const tooltipWidth = tooltip.offsetWidth;
-          tooltip.style.left = (triggerCenterX - tooltipWidth / 2) + 'px';
-          
-          tooltip.style.top = (rect.top + scrollTop) + 'px';
           tooltip.classList.add('active');
         });
       });
