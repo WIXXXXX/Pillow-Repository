@@ -131,30 +131,28 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* --- ENHANCED IOS-STYLE TOOLTIP --- */
+    /* --- MOBILE-FRIENDLY IOS-STYLE TOOLTIP (NO OVERFLOW) --- */
     .hotspot-tooltip {
       position: absolute;
       z-index: 9999;
       background: rgba(255, 255, 255, 0.98) !important;
-      backdrop-filter: blur(10px);
-      padding: 0.6rem 1rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.04);
+      padding: 0.8rem 1.2rem;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
       pointer-events: none;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       opacity: 0;
-      /* Core positioning: Centers on X axis, shifts up on Y axis */
+      max-width: 260px; /* Ensures tooltip stays within mobile screens */
       transform-origin: bottom center;
       transform: translate(-50%, calc(-100% - 4px)) scale(0.9);
-      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .hotspot-tooltip.active {
       opacity: 1;
-      /* Precisely lifts the tooltip so the arrow hits the dot perfectly */
-      transform: translate(-50%, calc(-100% - 12px)) scale(1);
+      transform: translate(-50%, calc(-100% - 15px)) scale(1);
     }
 
     .hotspot-tooltip::after {
@@ -163,9 +161,9 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      border-width: 6px 6px 0 6px;
+      border-width: 8px 8px 0 8px;
       border-style: solid;
-      border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
+      border-color: white transparent transparent transparent;
     }
 
     .tooltip-accent {
@@ -178,12 +176,27 @@
 
     .hotspot-tooltip h4 {
       color: #000000 !important;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       margin: 0;
       font-family: 'Inter', sans-serif;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
+      line-height: 1.4;
+      white-space: normal; /* Crucial: allows long text to wrap safely */
+      word-wrap: break-word;
+    }
+
+    /* --- DISCOUNT BADGE STYLING --- */
+    .discount-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #E0F2FE;
+      color: #0092D6;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
   </style>
 </head>
@@ -218,11 +231,13 @@
         <img src="images/product_display.jpg" alt="Realign Pillow Product" class="w-full h-auto object-contain rounded-3xl" />
       </div>
 
-      <div id="waitlist" class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-sm">
+      <div id="waitlist" class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-100 shadow-sm text-center">
         <form id="waitlistForm" action="#" method="POST" class="flex flex-col md:row items-center gap-4">
           <input type="email" name="email" required placeholder="We respect your inbox, no spam, just updates" class="email-input" />
           <button type="submit" class="btn w-full md:w-auto">Join the Waitlist</button>
         </form>
+        <div class="discount-badge">Early bird 40% off</div>
+        
         <p id="waitlistFeedback" class="text-sm font-medium mt-4 hidden"></p>
         
         <div class="mt-8 pt-8 border-t border-gray-100 flex items-center justify-center gap-3">
@@ -273,21 +288,20 @@
       
       <div class="flex flex-col w-full rounded-[2.5rem] overflow-hidden bg-white border border-gray-100 shadow-sm mb-12 group transition-all duration-300 hover:shadow-md">
           <div class="w-full p-10 md:p-14 pb-0 flex flex-col items-center text-center z-10">
-              <h3 class="font-serif text-3xl md:text-4xl text-slate-900 mb-3">Elevated Side Shelves</h3>
-              <p class="text-lg text-slate-600 max-w-md mx-auto">Provide a stable resting place for the forearms and hands.</p>
-          </div>
+              <h3 class="font-serif text-3xl md:text-4xl text-slate-900 mb-6">Elevated Side Shelves</h3>
+              </div>
           <div class="relative w-full max-w-4xl mx-auto px-8 md:px-16 pb-12 pt-8">
               <img src="images/SideView.png" alt="Elevated Side Shelves" class="w-full h-auto object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.02]" />
               
               <div class="absolute top-[48%] left-[26%] flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
-                   data-title="Stable Upper-Body Posture">
+                   data-title="Provide a stable resting place for the forearms and hands.">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
               </div>
 
               <div class="absolute top-[34%] right-[20%] flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
-                   data-title="Stable Upper-Body Posture">
+                   data-title="Provide a stable resting place for the forearms and hands.">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
@@ -297,14 +311,13 @@
 
       <div class="flex flex-col w-full rounded-[2.5rem] overflow-hidden bg-white border border-gray-100 shadow-sm mb-12 group transition-all duration-300 hover:shadow-md">
           <div class="w-full p-10 md:p-14 pb-0 flex flex-col items-center text-center z-10">
-              <h3 class="font-serif text-3xl md:text-4xl text-slate-900 mb-3">Headrest Zone</h3>
-              <p class="text-lg text-slate-600 max-w-md mx-auto">Keep head stabilized in correct position.</p>
-          </div>
+              <h3 class="font-serif text-3xl md:text-4xl text-slate-900 mb-6">Headrest Zone</h3>
+              </div>
           <div class="relative w-full max-w-4xl mx-auto px-8 md:px-16 pb-12 pt-8">
               <img src="images/SideUpperview.png" alt="Headrest Zone" class="w-full h-auto object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.02]" />
               
               <div class="absolute top-[43%] left-[51%] -translate-x-1/2 flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
-                   data-title="Spinal Alignment Guard">
+                   data-title="Keep head stabilized in correct position.">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
@@ -314,13 +327,13 @@
 
       <div class="flex flex-col w-full rounded-[2.5rem] overflow-hidden bg-white border border-gray-100 shadow-sm mb-12 group transition-all duration-300 hover:shadow-md">
           <div class="w-full p-10 md:p-14 pb-0 flex flex-col items-center text-center z-10">
-              <h3 class="font-serif text-3xl md:text-4xl text-slate-900 mb-2">Optimized Viewing Distance</h3>
+              <h3 class="font-serif text-3xl md:text-4xl text-slate-900 mb-6">Optimized Viewing Distance</h3>
           </div>
           <div class="relative w-full max-w-4xl mx-auto px-8 md:px-16 pb-12 pt-4">
               <img src="images/FrontView.png" alt="Optimized Viewing Distance" class="w-full h-auto object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.02]" />
               
               <div class="absolute top-[40%] left-[50%] -translate-x-1/2 flex flex-col items-center z-20 cursor-pointer hotspot-trigger" 
-                   data-title="Vision & Flexion Protection">
+                   data-title="Facilitates a consistent viewing distance to mitigate eye strain.">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
@@ -419,7 +432,7 @@
     <section class="py-20 border-t border-gray-200">
       <h2 class="font-serif text-4xl mb-12 text-center">Beta Testing</h2>
       <div class="grid md:grid-cols-3 gap-12">
-        <div class="flex flex-col italic text-lg text-gray-800">"Ngl, I didn’t realize how messed up my bed posture was when I doomscroll..." <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester A, Student</span></div>
+        <div class="flex flex-col italic text-lg text-gray-800">"Ngl, I didn’t realize how messed up my bed posture was when I doomscroll until I started using this. Realign basically forced me to scroll less because of how it keeps my neck in place. It’s lowkey forcing me to touch grass lol" <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester A, Student</span></div>
         <div class="flex flex-col italic text-lg text-gray-800">"It looks very cool on my bed and it literally forces me into the right position." <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester B, Student</span></div>
         <div class="flex flex-col italic text-lg text-gray-800">"It feels like a pillow that actually understands what people do before sleeping." <span class="not-italic text-xs font-bold uppercase tracking-widest mt-6 text-gray-400">— Tester C, Teacher</span></div>
       </div>
@@ -430,9 +443,9 @@
       <button class="faq-btn" data-faq><span>Will it fit a traditional pillowcase?</span> <i class="fas fa-plus text-xs"></i></button>
       <div class="faq-panel">Realign Pillow's unique ergonomic design won't fit into a standard pillowcase. But don't worry! We have designed a custom-fit cover that will be included in the box.</div>
       <button class="faq-btn" data-faq><span>Who is the team behind Realign Pillow?</span> <i class="fas fa-plus text-xs"></i></button>
-      <div class="faq-panel">We are a team of students in Singapore! As individuals who have personally struggled with poor posture, we came together to solve this common issue.</div>
+      <div class="faq-panel">We are a team of students in Singapore! As individuals who have personally struggled with poor posture, we came together to solve this common issue faced by millions of device users.</div>
       <button class="faq-btn" data-faq><span>When will my order ship?</span> <i class="fas fa-plus text-xs"></i></button>
-      <div class="faq-panel">As this is a Kickstarter project, production begins once we reach our funding goal. We will provide regular updates and a clear shipping timeline.</div>
+      <div class="faq-panel">As this is a Kickstarter project, production begins once we reach our funding goal. After the campaign ends successfully, we will move straight into manufacturing. We will provide all our backers with regular updates and a clear shipping timeline from factory to doorstep.</div>
     </section>
 
   </main>
@@ -445,6 +458,7 @@
         <input type="email" name="email" required placeholder="Join the waitlist now" class="flex-1 px-6 py-4 rounded-xl text-gray-900 border-none outline-none text-base" />
         <button type="submit" class="btn bg-[#1A1A1A] text-white hover:bg-black py-4 px-10 rounded-xl">Join the Waitlist</button>
       </form>
+      <div class="discount-badge">Early bird 40% off</div>
       <p id="waitlistFeedbackBottom" class="text-sm font-medium hidden mt-4 text-center"></p>
     </div>
     
