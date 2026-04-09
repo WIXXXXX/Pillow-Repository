@@ -75,16 +75,34 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
-    .top-banner-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.35rem;
-      font-weight: 500;
-      letter-spacing: 0;
-      color:#111111;
-      white-space: nowrap;
-    }
+.desktop-banner {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #111111;
+  white-space: nowrap;
+}
+
+.mobile-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #41f09b;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 10px 16px;
+}
+
+.mobile-banner a {
+  color: #111111;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: underline;
+}
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -188,6 +206,11 @@
       white-space: normal;
       word-wrap: break-word;
     }
+@media (max-width: 767px) {
+  body {
+    padding-top: calc(var(--nav-height) + 52px);
+  }
+}
   </style>
 </head>
 <body>
@@ -196,16 +219,16 @@
     <div class="flex items-center gap-3">
       <img src="images/logo_2.png" alt="Realign Pillow Logo" class="h-10 w-auto object-contain" />
     </div>
-    <div class="top-banner-center hidden md:block">
-	<a
-      	href="https://www.kickstarter.com/projects/realignpillow/realign-pillow-posture-protection-for-bed-phone-users"
-      	class="underline"
-      	target="_blank"
-      	rel="noopener noreferrer"
-    >
-       Launching soon on kickstarter! Join other backers now! 
-	</a>
-    </div>
+<div class="desktop-banner hidden md:block">
+  <a
+    href="https://www.kickstarter.com/projects/realignpillow/realign-pillow-posture-protection-for-bed-phone-users"
+    class="underline"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Launching soon on Kickstarter! Join other backers now!
+  </a>
+</div>
     <!--
     <div class="flex items-center gap-4 text-gray-700">
       <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -213,7 +236,15 @@
     </div>
     -->
   </nav>
-
+<div class="mobile-banner md:hidden">
+  <a
+    href="https://www.kickstarter.com/projects/realignpillow/realign-pillow-posture-protection-for-bed-phone-users"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Launching soon on Kickstarter! Join other backers now!
+  </a>
+</div>
   <main class="max-w-6xl mx-auto px-6 md:px-12">
     
     <section class="py-16 md:py-28 text-center">
@@ -344,20 +375,24 @@
       </div>
 
       <!-- Feature 3: Optimized Viewing Distance -->
+	
       <div class="flex flex-col w-full rounded-[2.5rem] overflow-hidden bg-white border border-gray-100 shadow-sm mb-12 group transition-all duration-300 hover:shadow-md">
           <div class="w-full p-10 md:p-14 pb-0 flex flex-col items-center text-center z-10">
               <h3 class="font-serif text-3xl md:text-4xl text-slate-900 mb-2">Optimized Viewing Distance</h3>
           </div>
           <div class="relative w-full max-w-4xl mx-auto px-8 md:px-16 pb-12 pt-4">
               <img src="images/FrontView.png" alt="Optimized Viewing Distance" class="w-full h-auto object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.02]" />
+		 <!--
               <div class="absolute top-[40%] left-[50%] -translate-x-1/2 flex flex-col items-center z-20 cursor-pointer hotspot-trigger"
                    data-title="Facilitates a consistent viewing distance to mitigate eye strain.">
                   <div class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-brand-500 shadow-[0_0_15px_rgba(0,146,214,0.6)] relative">
                       <div class="absolute inset-0 bg-brand-500 rounded-full animate-ping opacity-60"></div>
                   </div>
               </div>
+		-->
           </div>
       </div>
+
 
     </section>
 
